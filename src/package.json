@@ -1,0 +1,23 @@
+{
+  "name": "wordpress_npm",
+  "version": "1.0.0",
+  "description": "The Worpress theme with gulp. Including jade, livereload and sass",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniyal Hussain",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-concat": "*",
+    "gulp-imagemin": "*",
+    "gulp-jade-for-php": "*",
+    "gulp-jshint": "^2.1.0",
+    "gulp-livereload": "*",
+    "gulp-sass": "*",
+    "gulp-rename": "*",
+    "jshint": "^2.9.5",
+    "gulp-jade-modules": "*"
+  }
+}
