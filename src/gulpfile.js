@@ -39,15 +39,22 @@ gulp.task('img', function() {
 
 gulp.task('jade', function(){
   gulp.src('./*.jade')
-      .pipe(jadeModules({
-        paths: ['./components/']
-      }))
-      .pipe(jade({
-        pretty: true,
-        basedir: '/'
-      }))
+      .pipe(jade())
       .pipe(gulp.dest('./../'))
       .pipe(livereload());
+  gulp.src('./components/*.jade')
+      .pipe(jade())
+      .pipe(gulp.dest('./../components'))
+      .pipe(livereload());
+  gulp.src('./pages/*.jade')
+      .pipe(jade())
+      .pipe(gulp.dest('./../templates'))
+      .pipe(livereload());
+});
+
+gulp.task('wordpress', function() {
+  gulp.src('./style.css')
+      .pipe(gulp.dest('./../'))
 });
 
 gulp.task('watch', function() {
@@ -56,6 +63,8 @@ gulp.task('watch', function() {
   gulp.watch('./library/js/*.js', ['js']);
   gulp.watch('./library/img/*.{png,jpg,gif}', ['img']);
   gulp.watch('./*.jade', ['jade'])
+  gulp.watch('./components/*.jade', ['jade'])
+  gulp.watch('./style.css', ['wordpress'])
 });
 
 gulp.task('default', ['sass', 'js', 'img', 'jade', 'watch']);
