@@ -18,6 +18,9 @@
     "gulp-sass": "*",
     "gulp-rename": "*",
     "jshint": "^2.9.5",
-    "gulp-jade-modules": "*"
+    "gulp-jade-modules": "*",
+    "gulp-plumber": "*",
+    "gulp-notify": "*"
+
   }
 }

@@ -1,0 +1,1 @@
+<?php /* Template Name: template */; ?><?php get_header(); ?><h1>Template</h1><?php get_footer(); ?>

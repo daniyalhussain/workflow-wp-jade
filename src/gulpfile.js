@@ -7,11 +7,19 @@ var gulp = require('gulp')
   livereload = require('gulp-livereload'),
   rename = require("gulp-rename"),
   path = require('path'),
-  jadeModules = require('gulp-jade-modules');
+  jadeModules = require('gulp-jade-modules'),
+  plumber = require('gulp-plumber'),
+  notify = require('gulp-notify');
 
+var plumberErrorHandler = { errorHandler: notify.onError({
+    title: 'Gulp',
+    message: 'Error: <%= error.message %>'
+  })
+};
 
 gulp.task('sass', function () {
    gulp.src('./library/scss/application.scss')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(sass())
       .pipe(rename("style.css"))
       .pipe(gulp.dest('./../library/css'))
@@ -20,6 +28,7 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
   gulp.src('./library/js/*.js')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(jshint())
       .pipe(jshint.reporter('fail'))
       .pipe(concat('theme.js'))
@@ -29,6 +38,7 @@ gulp.task('js', function () {
 
 gulp.task('img', function() {
   gulp.src('./library/img/*.{png,jpg,gif}')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(imagemin({
         optimizationLevel: 7,
         progressive: true
@@ -39,14 +49,17 @@ gulp.task('img', function() {
 
 gulp.task('jade', function(){
   gulp.src('./*.jade')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(jade())
       .pipe(gulp.dest('./../'))
       .pipe(livereload());
   gulp.src('./components/*.jade')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(jade())
       .pipe(gulp.dest('./../components'))
       .pipe(livereload());
   gulp.src('./pages/*.jade')
+      .pipe(plumber(plumberErrorHandler))
       .pipe(jade())
       .pipe(gulp.dest('./../templates'))
       .pipe(livereload());
